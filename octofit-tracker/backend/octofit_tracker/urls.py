@@ -18,6 +18,8 @@ import os
 from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
+from rest_framework import routers
+from .views import TeamViewSet, UserViewSet, ActivityViewSet, WorkoutViewSet, LeaderboardViewSet
 
 def api_root(request):
     codespace_name = os.environ.get('CODESPACE_NAME', 'localhost')
@@ -30,12 +32,15 @@ def api_root(request):
         'leaderboard': f'{base_url}/api/leaderboard/',
     })
 
+router = routers.DefaultRouter()
+router.register(r'teams', TeamViewSet, basename='team')
+router.register(r'users', UserViewSet, basename='user')
+router.register(r'activities', ActivityViewSet, basename='activity')
+router.register(r'workouts', WorkoutViewSet, basename='workout')
+router.register(r'leaderboard', LeaderboardViewSet, basename='leaderboard')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', api_root, name='api-root'),
-    # path('api/users/', ...),
-    # path('api/teams/', ...),
-    # path('api/activities/', ...),
-    # path('api/workouts/', ...),
-    # path('api/leaderboard/', ...),
+    path('api/', include(router.urls)),
 ]
