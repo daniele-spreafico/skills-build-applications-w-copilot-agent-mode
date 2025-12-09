@@ -18,12 +18,12 @@ const Activities = () => {
   }, [endpoint]);
 
   return (
-    <div className="card shadow-sm mb-4">
+    <div className="card shadow-sm mb-4" style={{background: 'linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%)'}}>
       <div className="card-body">
-        <h2 className="card-title mb-4 text-primary">Activities</h2>
+        <h2 className="card-title mb-4 text-primary" style={{color: '#3a86ff'}}>Activities</h2>
         <div className="table-responsive">
-          <table className="table table-striped table-hover">
-            <thead className="table-light">
+          <table className="table table-striped table-hover" style={{borderRadius: '0.5rem', overflow: 'hidden'}}>
+            <thead className="table-light" style={{background: '#8338ec', color: '#fff'}}>
               <tr>
                 <th>#</th>
                 <th>Type</th>
@@ -34,9 +34,9 @@ const Activities = () => {
             </thead>
             <tbody>
               {data.map((item, idx) => (
-                <tr key={item.id || idx}>
+                <tr key={item.id || idx} style={{background: idx % 2 === 0 ? '#f1f3f8' : '#fff'}}>
                   <td>{idx + 1}</td>
-                  <td>{item.type}</td>
+                  <td style={{color: '#8338ec', fontWeight: 'bold'}}>{item.type}</td>
                   <td>{item.duration}</td>
                   <td>{item.date}</td>
                   <td>{item.user?.name || item.user || '-'}</td>
@@ -45,6 +45,7 @@ const Activities = () => {
             </tbody>
           </table>
         </div>
+        <button className="btn btn-primary mt-3" style={{background: 'linear-gradient(90deg, #3a86ff 0%, #8338ec 100%)', color: '#fff'}}>Log New Activity</button>
       </div>
     </div>
   );
